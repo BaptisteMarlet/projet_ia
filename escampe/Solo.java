@@ -2,7 +2,7 @@ package escampe;
 
 
 import java.util.Date;
-
+import escampe.PlateauEscampe;
 import javax.swing.JFrame;
 
 /**
@@ -23,10 +23,12 @@ import javax.swing.JFrame;
 public class Solo {
     private static IJoueur joueurBlanc;
     private static IJoueur joueurNoir;
+    private PlateauEscampe board;
     
     // Ne pas modifier ces constantes, elles seront utilisees par l'arbitre
     private final static int BLANC = -1;
     private final static int NOIR = 1;
+    private static PlateauEscampe PlateauCourant = new PlateauEscampe();
     
     private static int nbCoups = 0;
     
@@ -94,7 +96,11 @@ public class Solo {
     	boolean partieFinie = false;
     	IJoueur joueurCourant = joueurNoir; // Dans Escampe le joueur Noir commence
     	
+
+    	
     	while (!partieFinie) {
+    		
+    	   
     		nbCoups++;
     		
     		System.out.println("\n*********\nOn demande à " + joueurCourant.binoName() + " de jouer...");
@@ -112,7 +118,7 @@ public class Solo {
     		catch (InterruptedException e) {
     		}
     		
-    		if (coup.compareTo("xxxxx") == 0)
+    		if (coup == "GameOver")
     			partieFinie = true;
     		else if (nbCoups == 2) { // Dans Escampe le joueur Blanc rejoue après avoir posé ses pièces
     			// On avertit le joueur Noir du placement des pièces
